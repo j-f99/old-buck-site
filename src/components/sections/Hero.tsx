@@ -6,11 +6,7 @@ import Image from "next/image";
 export default function Hero() {
   const amazonFourPack = "https://www.amazon.com/Old-Buck-Bamboo-Premium-Cigarette-Style/dp/B0G4PZF9B5";
 
-  // ULTRA-TIGHT PRECISION SPACING:
-  // Mobile: Header (~108px) + Tight Gap (8px) = 116px
-  // Desktop: Header (~128px) + Tight Gap (16px) = 144px
   const topInset = "top-[116px] lg:top-[144px]";
-  const sideMargin = "left-2 lg:left-4 right-2 lg:right-4";
   const bottomInset = "bottom-2 lg:bottom-4";
 
   return (
@@ -27,7 +23,6 @@ export default function Hero() {
 
         {/* Corner Frames - Ultra-Tight Alignment */}
         <div className="absolute inset-0 z-20 pointer-events-none opacity-90">
-
           {/* TOP LEFT */}
           <div className={`absolute ${topInset} left-2 lg:left-4 w-14 h-14 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40`}>
             <Image src="/images/Old Buck Antlers and Tees Icon.svg" alt="" fill className="object-contain" />
@@ -49,9 +44,18 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Overlays */}
+        {/* OVERLAYS */}
+        {/* 1. The Global Mask (Multiplied for color depth) */}
         <div className="absolute inset-0 bg-midnight/30 mix-blend-multiply group-hover:opacity-10 transition-opacity duration-[1500ms] z-10 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-midnight/80 via-midnight/10 to-transparent group-hover:opacity-70 transition-opacity duration-[1500ms] z-10 pointer-events-none" />
+
+        {/* 2. THE SECRET SAUCE: Radial "Focus" Glow. 
+               This puts a subtle dark circle behind the text to make the cream/gold pop without washing out the rest of the trees. */}
+        <div
+          className="absolute inset-0 z-10 pointer-events-none transition-opacity duration-[1500ms]"
+          style={{
+            background: 'radial-gradient(circle at center, rgba(4, 30, 66, 0.45) 0%, rgba(4, 30, 66, 0) 70%)'
+          }}
+        />
       </div>
 
       {/* Hero Content */}
@@ -62,7 +66,11 @@ export default function Hero() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="mb-8"
         >
-          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-cream tracking-wide drop-shadow-2xl text-balance leading-tight">
+          {/* Added a subtle text-shadow here for extra legibility */}
+          <h1
+            className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-cream tracking-wide text-balance leading-tight"
+            style={{ textShadow: '0 4px 12px rgba(0,0,0,0.3)' }}
+          >
             For the Pack A Day Golfer.<br />
             <span className="italic text-gold/90">Smoke &apos;Em To The Green.</span>
           </h1>
