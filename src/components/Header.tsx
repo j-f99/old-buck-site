@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Instagram } from "lucide-react";
 import Image from "next/image";
@@ -18,6 +18,24 @@ export default function Header() {
     { name: "Why Old Buck?", href: "#why-old-buck", id: "why-old-buck" },
     { name: "Contact", href: "#contact", id: "contact" },
   ];
+
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 80; // Adjust for fixed header height
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+      setIsOpen(false);
+    }
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -63,7 +81,7 @@ export default function Header() {
       <nav className={`w-full transition-all duration-300 relative z-[1000] ${isScrolled || isOpen ? "bg-midnight shadow-xl" : "bg-midnight/80 backdrop-blur-sm"}`}>
         <div className="max-w-full mx-auto px-4 sm:px-8 lg:px-12 flex items-center h-16 md:h-20">
           <div className="flex-1">
-            <a href="#hero" className="flex items-center space-x-2 w-fit">
+            <a href="#hero" onClick={(e) => scrollToSection(e, "hero")} className="flex items-center space-x-2 w-fit">
               <div className="relative h-8 w-8 md:h-10 md:w-10">
                 <Image src="/images/favicon.svg" alt="Logo" fill className="object-contain" />
               </div>
@@ -77,6 +95,7 @@ export default function Header() {
               <a
                 key={link.name}
                 href={link.href}
+                onClick={(e) => scrollToSection(e, link.id)}
                 className={`group relative text-[14px] font-bold uppercase tracking-[0.15em] transition-colors py-2 ${activeSection === link.id ? "text-gold" : "text-cream hover:text-gold"
                   }`}
               >
@@ -125,7 +144,7 @@ export default function Header() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 + i * 0.1 }}
                     href={link.href}
-                    onClick={() => setIsOpen(false)}
+                    onClick={(e) => scrollToSection(e, link.id)}
                     className={`text-3xl font-serif uppercase tracking-[0.2em] active:text-gold ${activeSection === link.id ? "text-gold" : "text-cream"}`}
                   >
                     {link.name}
