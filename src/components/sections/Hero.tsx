@@ -6,7 +6,11 @@ import Image from "next/image";
 export default function Hero() {
   const amazonFourPack = "https://www.amazon.com/Old-Buck-Bamboo-Premium-Cigarette-Style/dp/B0G4PZF9B5";
 
+  // ULTRA-TIGHT PRECISION SPACING:
+  // Mobile: Header (~108px) + Tight Gap (8px) = 116px
+  // Desktop: Header (~128px) + Tight Gap (16px) = 144px
   const topInset = "top-[116px] lg:top-[144px]";
+  const sideMargin = "left-2 lg:left-4 right-2 lg:right-4";
   const bottomInset = "bottom-2 lg:bottom-4";
 
   return (
@@ -23,6 +27,7 @@ export default function Hero() {
 
         {/* Corner Frames - Ultra-Tight Alignment */}
         <div className="absolute inset-0 z-20 pointer-events-none opacity-90">
+
           {/* TOP LEFT */}
           <div className={`absolute ${topInset} left-2 lg:left-4 w-14 h-14 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40`}>
             <Image src="/images/Old Buck Antlers and Tees Icon.svg" alt="" fill className="object-contain" />
@@ -44,8 +49,9 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Overlays - Gradient Removed, Mask Kept */}
+        {/* Overlays */}
         <div className="absolute inset-0 bg-midnight/30 mix-blend-multiply group-hover:opacity-10 transition-opacity duration-[1500ms] z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-midnight/80 via-midnight/10 to-transparent group-hover:opacity-70 transition-opacity duration-[1500ms] z-10 pointer-events-none" />
       </div>
 
       {/* Hero Content */}
