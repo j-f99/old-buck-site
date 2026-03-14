@@ -16,7 +16,8 @@ export const metadata: Metadata = {
   title: "Old Buck Premium Golf Tees.",
   description: "Old Buck Premium Golf Tees. Made from sustainable bamboo. Available in packs of 1, 4, and 10. Shop now on Amazon.",
   icons: {
-    icon: "/images/favicon.svg",
+    icon: "/icon.svg", // This points to the file you just put in the app folder
+    apple: "/icon.svg",
   },
 };
 
