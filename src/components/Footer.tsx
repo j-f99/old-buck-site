@@ -10,7 +10,7 @@ export default function Footer() {
             <div className="flex items-center space-x-3">
               <div className="relative h-12 w-12 overflow-hidden rounded-full">
                 <Image
-                  src="/images/Old Buck Favicon.svg"
+                  src="/images/favicon.svg"
                   alt="Old Buck Logo"
                   fill
                   className="object-contain"

@@ -65,7 +65,7 @@ export default function Header() {
           <div className="flex-1">
             <a href="#hero" className="flex items-center space-x-2 w-fit">
               <div className="relative h-8 w-8 md:h-10 md:w-10">
-                <Image src="/images/Old Buck Favicon.svg" alt="Logo" fill className="object-contain" />
+                <Image src="/images/favicon.svg" alt="Logo" fill className="object-contain" />
               </div>
               <span className="font-serif text-lg md:text-xl font-bold tracking-wider text-cream uppercase">OLD BUCK</span>
             </a>
