@@ -13,11 +13,22 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Old Buck Premium Golf Tees.",
-  description: "Old Buck Premium Golf Tees. Made from sustainable bamboo. Available in packs of 1, 4, and 10. Shop now on Amazon.",
+  title: "Old Buck Golf",
+  description: "Premium Bamboo Golf Tees",
   icons: {
-    icon: "/icon.svg", // This points to the file you just put in the app folder
-    apple: "/icon.svg",
+    icon: [
+      {
+        url: "/icon.svg",
+        type: "image/svg+xml",
+      },
+    ],
+    // This tells iPhones what to show if someone saves your site to their home screen
+    apple: [
+      {
+        url: "/icon.svg",
+        type: "image/svg+xml",
+      },
+    ],
   },
 };
 

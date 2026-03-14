@@ -7,9 +7,8 @@ export default function Footer() {
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const element = document.getElementById(id);
-
     if (element) {
-      const headerOffset = 80; // The height of your nav
+      const headerOffset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -17,9 +16,9 @@ export default function Footer() {
         top: offsetPosition,
         behavior: "smooth",
       });
-
     }
   };
+
 
 
   return (
