@@ -18,5 +18,5 @@ body {
   background: var(--midnight);
   color: var(--cream);
   font-family: var(--font-sans);
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
 }
