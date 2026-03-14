@@ -15,7 +15,7 @@ export default function Home() {
         <Story />
         <Contact />
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
