@@ -20,28 +20,16 @@ export default function Header() {
   ];
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault();
+    // We do NOT call e.preventDefault() here anymore. 
+    // We want the browser to use the natural #id link.
 
-    // 1. Close the menu immediately
+    // Just close the menu
     setIsOpen(false);
 
-    // 2. Wait a tiny beat for the menu to clear, then scroll
-    setTimeout(() => {
-      // 3. Ensure body is unlocked before scroll (Safari stability)
-      document.body.style.overflow = "unset";
-
-      const element = document.getElementById(id);
-      if (element) {
-        const headerOffset = 80;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.scrollY - headerOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
-      }
-    }, 10);
+    // If the user is already at the section, we can force a close
+    if (window.location.hash === `#${id}`) {
+      setIsOpen(false);
+    }
   };
 
   useEffect(() => {
