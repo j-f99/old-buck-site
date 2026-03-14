@@ -4,8 +4,10 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Instagram } from "lucide-react";
 import Image from "next/image";
+import { useLenis } from 'lenis/react'; // Import Lenis hook
 
 export default function Header() {
+  const lenis = useLenis(); // Initialize Lenis
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const [isScrolled, setIsScrolled] = useState(false);
@@ -20,16 +22,14 @@ export default function Header() {
   ];
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    // We do NOT call e.preventDefault() here anymore. 
-    // We want the browser to use the natural #id link.
+    e.preventDefault(); // Stop the browser from "jumping"
+    setIsOpen(false);   // Close mobile menu
 
-    // Just close the menu
-    setIsOpen(false);
-
-    // If the user is already at the section, we can force a close
-    if (window.location.hash === `#${id}`) {
-      setIsOpen(false);
-    }
+    // Tell Lenis to glide to the section with the specific offset
+    lenis?.scrollTo(`#${id}`, {
+      offset: -80,
+      duration: 1.5,
+    });
   };
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export default function Header() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [navLinks]);
 
   return (
     <header className="fixed top-0 left-0 w-full z-[9999]">

@@ -5,6 +5,28 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
+// 1. Define fonts at the top
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+});
+
+// 2. Metadata
+export const metadata: Metadata = {
+  title: "Old Buck Golf",
+  description: "Premium Bamboo Golf Tees",
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/icon.svg", type: "image/svg+xml" }],
+  },
+};
+
+// 3. Root Layout
 export default function RootLayout({
   children,
 }: {
@@ -24,33 +46,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "Old Buck Golf",
-  description: "Premium Bamboo Golf Tees",
-  icons: {
-    icon: [
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
-    ],
-    // This tells iPhones what to show if someone saves your site to their home screen
-    apple: [
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
-    ],
-  },
-};

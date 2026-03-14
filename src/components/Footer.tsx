@@ -2,13 +2,19 @@
 
 import React from "react";
 import Image from "next/image";
+import { useLenis } from 'lenis/react'; // Import Lenis hook
 
 export default function Footer() {
+  const lenis = useLenis(); // Initialize Lenis
+
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    // No e.preventDefault(). Let the anchor do its job.
+    e.preventDefault(); // Stop the "jump"
+
+    lenis?.scrollTo(`#${id}`, {
+      offset: -80,
+      duration: 1.5,
+    });
   };
-
-
 
   return (
     <footer className="bg-midnight py-16 border-t border-white/5">
@@ -75,7 +81,7 @@ export default function Footer() {
             </div>
             {/* Find us on Amazon Button */}
             <a
-              href="https://www.amazon.com/Old-Buck-Bamboo-Premium-Cigarette-Style/dp/B0G4PZF9B5/ref=sr_1_1?crid=34QLM406EZYSH&dib=eyJ2IjoiMSJ9.5E1AhVujVVgay_Sz_2QWaun-J2jA6swM5wVsHBKmRnknNDGRU32V2qyOpW73B5r39Ggjj_7aglkHoggSPK8802SyIoiR-s45stfQWEaHagVF4m4QPQguUSxFyCvVa9HeUURjIZt-BLirfFGD8Iu1VfV8lH12EBNmDeLxVDZtc8mjnV1mKnCGt5GWles8TPQhMwYMikjUy7ziAwL936ZLplPozjwFKzI1zTWqIFvkQ_s.2Sw11fEO0YOz3dJT-4NaA3MrE9svN7xJI87MBa4Sumg&dib_tag=se&keywords=old%2Bbuck&qid=1773418886&sprefix=old%2Bbuck%2Caps%2C177&sr=8-1&th=1"
+              href="https://www.amazon.com/Old-Buck-Bamboo-Premium-Cigarette-Style/dp/B0G4PZF9B5"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 px-8 py-3 border border-gold/50 text-gold hover:bg-gold hover:text-midnight transition duration-500 rounded-sm text-[10px] font-bold tracking-[0.2em] uppercase inline-block"
