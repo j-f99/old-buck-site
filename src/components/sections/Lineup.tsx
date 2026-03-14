@@ -28,7 +28,7 @@ const products = [
   {
     id: "10-pack",
     name: "'The I've Got A Problem' 10-Pack",
-    desc: "A whole carton to get you through the season.",
+    desc: "A carton to get you through the season.",
     image: "/images/Old Buck Amazon-10 Pack.png",
     lifestyle: "/images/Lifestyle 10P.jpg",
     lifestylePosition: "15% center",
