@@ -56,6 +56,9 @@ export default function Hero() {
 
       {/* Hero Content */}
       <div className="relative z-30 text-center px-6 sm:px-12 lg:px-8 max-w-5xl mx-auto flex flex-col items-center">
+        {/* Text Protector Gradient - Softens the background specifically behind the text */}
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(4,30,66,0.6)_0%,transparent_70%)] pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity duration-1000" />
+        
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
