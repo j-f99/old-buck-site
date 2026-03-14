@@ -7,7 +7,7 @@ const products = [
   {
     id: "single",
     name: "The Single - 18 Premium Tees",
-    desc: "A taste of the tradition.",
+    desc: "18 Classic Sticks.",
     image: "/images/Old Buck Amazon-Single.png",
     lifestyle: "/images/Lifestyle Single.jpg",
     lifestylePosition: "object-center",
@@ -17,7 +17,7 @@ const products = [
   {
     id: "4-pack",
     name: "'The Seriously Addicted' 4-Pack",
-    desc: "Our signature bamboo tees.",
+    desc: "Bundle of 4 to feed your addiciton.",
     image: "/images/Old Buck Amazon-4 Pack.png",
     lifestyle: "/images/Lifestyle 4P.jpg",
     lifestylePosition: "object-center",
@@ -28,7 +28,7 @@ const products = [
   {
     id: "10-pack",
     name: "'The I've Got A Problem' 10-Pack",
-    desc: "To get you through the season.",
+    desc: "A whole carton to get you through the season.",
     image: "/images/Old Buck Amazon-10 Pack.png",
     lifestyle: "/images/Lifestyle 10P.jpg",
     lifestylePosition: "15% center",

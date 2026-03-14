@@ -27,11 +27,14 @@ export default function Header() {
 
     // 2. Wait a tiny beat for the menu to clear, then scroll
     setTimeout(() => {
+      // 3. Ensure body is unlocked before scroll (Safari stability)
+      document.body.style.overflow = "unset";
+
       const element = document.getElementById(id);
       if (element) {
         const headerOffset = 80;
         const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
         window.scrollTo({
           top: offsetPosition,
