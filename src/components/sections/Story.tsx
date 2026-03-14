@@ -86,7 +86,7 @@ export default function Story() {
           </motion.div>
 
           {/* Carousel Content */}
-          <div 
+          <div
             className="relative group w-full"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}

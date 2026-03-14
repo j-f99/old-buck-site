@@ -14,12 +14,6 @@
   --font-sans: var(--font-inter);
 }
 
-/* This is the native smooth scroll & header offset fix */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
-}
-
 body {
   background: var(--midnight);
   color: var(--cream);

@@ -1,6 +1,29 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body className={`${inter.variable} ${playfair.variable} antialiased`}>
+        <SmoothScroll>
+          <Header />
+          <main className="flex-grow">
+            {children}
+          </main>
+          <Footer />
+        </SmoothScroll>
+      </body>
+    </html>
+  );
+}
 
 const inter = Inter({
   variable: "--font-inter",
@@ -31,19 +54,3 @@ export const metadata: Metadata = {
     ],
   },
 };
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${inter.variable} ${playfair.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
-  );
-}
