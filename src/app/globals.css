@@ -4,8 +4,6 @@
   --midnight: #041E42;
   --cream: #F3EFE0;
   --gold: #C1A35F;
-  /* This creates a native smooth scroll for the whole page */
-  scroll-behavior: smooth;
 }
 
 @theme inline {
@@ -16,13 +14,14 @@
   --font-sans: var(--font-inter);
 }
 
+/* This is the native smooth scroll & header offset fix */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
 body {
   background: var(--midnight);
   color: var(--cream);
   font-family: var(--font-sans);
-}
-
-/* This is the secret sauce for Safari and Fixed Headers */
-section {
-  scroll-margin-top: 100px;
 }
