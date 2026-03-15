@@ -5,6 +5,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContentProtection from "@/components/ContentProtection";
+import { Analytics } from "@vercel/analytics/next"
 
 // 1. Define fonts at the top
 const inter = Inter({
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
   },
 };
 
+
 export default function RootLayout({
   children,
 }: {
@@ -44,6 +46,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </SmoothScroll>
+        <Analytics />
       </body>
     </html>
   );
