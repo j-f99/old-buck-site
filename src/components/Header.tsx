@@ -22,14 +22,31 @@ export default function Header() {
   ];
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault(); // Stop the browser from "jumping"
-    setIsOpen(false);   // Close mobile menu
+    e.preventDefault();
+    setIsOpen(false);
 
-    // Tell Lenis to glide to the section with the specific offset
-    lenis?.scrollTo(`#${id}`, {
-      offset: -80,
-      duration: 1.5,
-    });
+    // 1. Try to use Lenis first (Desktop)
+    if (lenis) {
+      lenis.scrollTo(`#${id}`, {
+        offset: -80,
+        duration: 1.5,
+      });
+    } else {
+      // 2. Fallback for Mobile (Native Scroll)
+      const element = document.getElementById(id);
+      if (element) {
+        const offset = 80;
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = element.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    }
   };
 
   useEffect(() => {
