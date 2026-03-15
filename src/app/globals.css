@@ -14,8 +14,23 @@
   --font-sans: var(--font-inter);
 }
 
+/* REMOVED: html, body { touch-action: pan-y !important; } 
+   This was likely fighting with Lenis.
+*/
+
+html {
+  /* Allow the browser to handle its own scrolling physics */
+  scroll-behavior: auto;
+}
+
 body {
   background: var(--midnight);
   color: var(--cream);
   font-family: var(--font-sans);
+  /* Prevents horizontal sway but allows vertical scroll */
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+  /* Ensures the body can actually expand to fit your content */
+  min-height: 100vh;
 }

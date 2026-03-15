@@ -1,9 +1,42 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
 export default function Hero() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isPressed, setIsPressed] = useState(false);
+  const [isOver, setIsOver] = useState(false);
+
+  useEffect(() => {
+    const checkTouch = () => {
+      // Robust categorization: (pointer: coarse) identifies finger/touch primary devices
+      const isTouchCategory = window.matchMedia("(pointer: coarse)").matches;
+      // Also check maxTouchPoints as a fallback for some older iPads
+      const hasTouchPoints = navigator.maxTouchPoints > 0;
+
+      setIsMobile(isTouchCategory || hasTouchPoints);
+    };
+
+    checkTouch();
+    window.addEventListener("resize", checkTouch);
+
+    const handleGlobalUp = () => {
+      setIsPressed(false);
+      setIsOver(false);
+    };
+
+    window.addEventListener("pointerup", handleGlobalUp, { passive: true });
+    window.addEventListener("pointercancel", handleGlobalUp, { passive: true });
+
+    return () => {
+      window.removeEventListener("resize", checkTouch);
+      window.removeEventListener("pointerup", handleGlobalUp);
+      window.removeEventListener("pointercancel", handleGlobalUp);
+    };
+  }, []);
+
   const amazonFourPack = "https://www.amazon.com/Old-Buck-Bamboo-Premium-Cigarette-Style/dp/B0G4PZF9B5";
 
   const topInset = "top-[116px] lg:top-[144px]";
@@ -13,13 +46,46 @@ export default function Hero() {
     <section id="hero" className="relative group h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0 bg-midnight">
-        <Image
-          src="/images/Hero Shot.jpg"
-          alt="Old Buck Golf Tees"
-          fill
-          priority
-          className="object-cover object-center group-hover:scale-105 transition-transform duration-[2000ms] ease-out"
-        />
+        <div className="absolute inset-0">
+          <motion.div
+            className="absolute inset-0 protect-image"
+            animate={isMobile ? { scale: (isPressed && isOver) ? 1.08 : 1 } : {}}
+            onPointerDown={(e) => {
+              if (isMobile) {
+                setIsPressed(true);
+                setIsOver(true);
+              }
+            }}
+            onPointerUp={() => {
+              setIsPressed(false);
+              setIsOver(false);
+            }}
+            onPointerCancel={() => {
+              setIsPressed(false);
+              setIsOver(false);
+            }}
+            onPointerMove={(e) => {
+              if (!isMobile || !isPressed) return;
+              const rect = e.currentTarget.getBoundingClientRect();
+              const isInside = (
+                e.clientX >= rect.left &&
+                e.clientX <= rect.right &&
+                e.clientY >= rect.top &&
+                e.clientY <= rect.bottom
+              );
+              if (isOver !== isInside) setIsOver(isInside);
+            }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            <Image
+              src="/images/Hero Shot.jpg"
+              alt="Old Buck Golf Tees"
+              fill
+              priority
+              className="object-cover object-center lg:group-hover:scale-110 transition-transform duration-[2000ms] ease-out"
+            />
+          </motion.div>
+        </div>
 
         {/* Corner Frames - Ultra-Tight Alignment */}
         <div className="absolute inset-0 z-20 pointer-events-none opacity-90">
@@ -46,11 +112,18 @@ export default function Hero() {
 
         {/* OVERLAYS */}
         {/* 1. The Global Mask (Multiplied for color depth) */}
-        <div className="absolute inset-0 bg-midnight/30 mix-blend-multiply group-hover:opacity-10 transition-opacity duration-[1500ms] z-10 pointer-events-none" />
+        <motion.div
+          initial={false}
+          animate={isMobile ? { opacity: (isPressed && isOver) ? 0.3 : 1 } : {}}
+          transition={{ duration: 1.5 }}
+          className={`absolute inset-0 bg-midnight/30 mix-blend-multiply pointer-events-none z-10 transition-opacity duration-[1500ms] ${!isMobile ? 'lg:group-hover:opacity-10' : ''}`}
+        />
 
-        {/* 2. THE SECRET SAUCE: Radial "Focus" Glow. 
-               This puts a subtle dark circle behind the text to make the cream/gold pop without washing out the rest of the trees. */}
-        <div
+        {/* 2. THE SECRET SAUCE: Radial "Focus" Glow. */}
+        <motion.div
+          initial={false}
+          animate={isMobile ? { opacity: (isPressed && isOver) ? 0.4 : 1 } : {}}
+          transition={{ duration: 1.5 }}
           className="absolute inset-0 z-10 pointer-events-none transition-opacity duration-[1500ms]"
           style={{
             background: 'radial-gradient(circle at center, rgba(4, 30, 66, 0.45) 0%, rgba(4, 30, 66, 0) 70%)'
@@ -86,9 +159,9 @@ export default function Hero() {
             href={amazonFourPack}
             target="_blank"
             rel="noopener noreferrer"
-            className="group/btn relative inline-flex items-center justify-center w-full sm:w-auto px-10 py-5 font-sans font-bold text-midnight bg-gold border border-gold hover:text-gold transition-colors duration-300 overflow-hidden rounded-sm"
+            className="group/btn relative inline-flex items-center justify-center w-full sm:w-auto px-10 sm:px-16 py-5 font-sans font-bold text-midnight bg-gold border border-gold hover:text-gold transition-all duration-300 overflow-hidden rounded-sm whitespace-nowrap flex-shrink-0"
           >
-            <span className="relative z-10 tracking-[0.2em] uppercase text-xs md:text-sm">Shop the Lineup on Amazon</span>
+            <span className="relative z-10 tracking-[0.2em] uppercase text-xs sm:text-sm md:text-base lg:text-lg">Shop the Lineup on Amazon</span>
             <div className="absolute inset-0 h-full w-full bg-midnight transform translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-out z-0"></div>
           </a>
         </motion.div>

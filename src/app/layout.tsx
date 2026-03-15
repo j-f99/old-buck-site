@@ -4,6 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ContentProtection from "@/components/ContentProtection";
 
 // 1. Define fonts at the top
 const inter = Inter({
@@ -26,7 +27,6 @@ export const metadata: Metadata = {
   },
 };
 
-// 3. Root Layout
 export default function RootLayout({
   children,
 }: {
@@ -34,7 +34,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${playfair.variable} antialiased`}>
+      {/* Added flex flex-col min-h-screen to the body */}
+      <body className={`${inter.variable} ${playfair.variable} antialiased flex flex-col min-h-screen`}>
+        <ContentProtection />
         <SmoothScroll>
           <Header />
           <main className="flex-grow">

@@ -145,6 +145,19 @@ export default function Header() {
                     {link.name}
                   </motion.a>
                 ))}
+
+                <motion.a
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5 }}
+                  whileTap={{ scale: 1.05 }}
+                  href={amazonFourPack}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 bg-gold px-10 py-4 text-[14px] font-black text-midnight uppercase tracking-[0.2em] rounded-sm shadow-xl"
+                >
+                  Shop Amazon
+                </motion.a>
               </div>
             </motion.div>
           )}

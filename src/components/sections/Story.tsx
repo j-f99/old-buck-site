@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ChevronLeft, ChevronRight, Instagram } from "lucide-react";
 import Image from "next/image";
 
@@ -16,6 +16,8 @@ const carouselImages = [
 export default function Story() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const carouselRef = useRef(null);
+  const isInView = useInView(carouselRef, { amount: 0.5 });
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % carouselImages.length);
@@ -26,13 +28,13 @@ export default function Story() {
   };
 
   useEffect(() => {
-    if (!isHovered) {
+    if (!isHovered && isInView) {
       const timer = setInterval(() => {
         nextSlide();
       }, 5000);
       return () => clearInterval(timer);
     }
-  }, [nextSlide, isHovered]);
+  }, [nextSlide, isHovered, isInView]);
 
   // Helper to get image at offset for previews
   const getImageAt = (offset: number) => {
@@ -87,6 +89,7 @@ export default function Story() {
 
           {/* Carousel Content */}
           <div
+            ref={carouselRef}
             className="relative group w-full"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
